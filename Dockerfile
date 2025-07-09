@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /usr/app
 
 #Copy the required files
-COPY  . .,
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
