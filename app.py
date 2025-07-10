@@ -2,6 +2,7 @@ from flask import Flask
 import socket
 from datetime import datetime
 import os
+from feature import get_system_info, generate_system_info_html
 
 app = Flask(__name__)
 
@@ -34,12 +35,32 @@ def hello():
             <p><strong>Hostname:</strong> {hostname}</p>
             <p><strong>IP Address:</strong> {ip_address}</p>
             <p><strong>Timestamp:</strong> {time_now}</p>
+            <hr>
+            <p><a href="/system-info">View System Information</a></p>
         """
     except Exception as e:
         return f"""
             <h1>Hello from DevOps!</h1>
             <p><strong>Error:</strong> {str(e)}</p>
             <p><strong>Timestamp:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+        """
+
+
+@app.route("/system-info")
+def system_info():
+    """Route to display comprehensive system information"""
+    try:
+        hostname = socket.gethostname()
+        ip_address = get_ip_address()
+        time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        return generate_system_info_html(hostname, ip_address, time_now)
+    except Exception as e:
+        return f"""
+            <h1>Hello from DevOps!</h1>
+            <p><strong>Error:</strong> {str(e)}</p>
+            <p><strong>Timestamp:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+            <p><a href="/">Back to Home</a></p>
         """
 
 
