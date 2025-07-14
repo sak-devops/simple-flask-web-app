@@ -1,4 +1,6 @@
-# Simple Flask Web App
+# Simple Flask Web App 
+
+A simple web application built using Python's Flask framework.
 
 This is a basic Flask app that displays:
 - Hello message
